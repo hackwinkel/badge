@@ -1,3 +1,5 @@
+Except for four SVG files in the data directory, the following license applies:
+
 MIT License
 
 Copyright (c) 2020 hackwinkel
@@ -19,3 +21,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+The following four SVG files in the data directory have different licences as indicated below:
+
+ISO_7010_W019.svg : public domain.
+source: https://commons.wikimedia.org/wiki/File:ISO_7010_W019.svg
+
+ISO_7010_W008.svg : public domain.
+source: https://commons.wikimedia.org/wiki/File:ISO_7010_W008.svg
+
+ISO_7010_W016.svg : public domain.
+source: https://commons.wikimedia.org/wiki/File:ISO_7010_W016.svg
+
+ISO_7010_W035.svg : CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
+source: https://commons.wikimedia.org/wiki/File:ISO_7010_W035.svg
