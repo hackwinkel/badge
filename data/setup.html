@@ -1,0 +1,28 @@
+<!doctype HTML>
+<html>
+<head>
+<title>
+setup
+</title>
+</head>
+<body bgcolor="#440000">
+<center>
+<h1 style="color:yellow; font-size:50px">
+DANGER
+</h1>
+<img src="ISO_7010_W008.svg" width="100px" alt="man falling">
+<img src="ISO_7010_W016.svg" width="100px" alt="toxic materials">
+<img src="ISO_7010_W019.svg" width="100px" alt="crushing">
+<img src="ISO_7010_W035.svg" width="100px" alt="falling parts">
+<p style="color:white;">
+Your badge needs to join the WIFI network you are using before you can upload files. Please provide the necessary details below.</p>
+<form action="/config" method="post">
+<h3 style="color:white;">network name (SSID): <input type="text" name="ssid"><br><br>
+password: <input type="password" name="pwd"><br><br>
+Allow background upload: <input type="radio" name="ccu" value="1" checked="1"> yes /
+<input type="radio" name="ccu" value="0"> no <br>
+<button type="submit" value="Submit">Submit</button></h3></form>
+<p style="color:white;">After clicking submit, reboot your badge in any other mode to let it connect to your WIFI network</p>
+</center>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype HTML>
+<html>
+<head>
+<title>
+upload
+</title>
+</head>
+<body bgcolor="#440000">
+<center>
+<p style="color:white;">
+To <b>replace</b> the following file you can upload an image here.</p>
+<hr>
+<h3 style="color:white;">Slot %FILENUMBER%</h3>
+<img src="/%FILENUMBER%.jpg">
+<hr>
+<p style="color:white;">Your image should ideally be 240 pixels high and 240 pixels wide.<br>
+If it is larger then only the top-left corner will be displayed or the upload may fail.<br>
+The image <b>must</b> be a <b>"baseline"</b> JPEG file - <b>"Progressive"</b> JPEG do not work.<br>
+<a href="/baseline">click here</a> for more information on how to make baseline JPEG files.</p>
+<form action="/doupload" method="post" enctype="multipart/form-data">
+<input type="hidden" name="p" value="%FILENUMBER%">
+<input type="file" name="fn">
+<input type="submit" value="upload">
+</form>
+</center>
+</body>
+</html>
