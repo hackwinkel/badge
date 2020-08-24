@@ -37,6 +37,7 @@
 #include "badgewifi.h"
 #include "badgebuttons.h"
 #include "badgelagno.h"
+#include "badgelife.h"
 
 // rotation setup in badgerotation
 extern int rotation;
@@ -172,7 +173,17 @@ void setup()
       break;
     case 3: // game 2
     case 4: // game 3
-    case 5: // something hanging
+    case 5: // something hanging life
+      tftinit(ST77XX_BLACK);
+      if (allowconcurrentupload)
+      {
+        if (setupwifi(0)) setupwebserver(0); // run upload webserver
+      }
+      allocatelifebuffers();
+      initializelifebuffer();
+      drawlife();
+      break;
+    
     case 6: // something standing
     default: // slideshow
       tftinit(ST77XX_BLACK);
@@ -208,6 +219,10 @@ void loop()
     case 3: // game 2
     case 4: // game 3
     case 5: // something hanging
+      iteratelife();
+      swaplifebuffers();
+      drawlife();
+      break;
     case 6: // something standing
     default: // slideshow - combination with webserver causes problems
       if ((now-lastslidetime)>5000)

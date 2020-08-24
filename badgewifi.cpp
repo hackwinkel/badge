@@ -43,7 +43,7 @@ byte* uploadbuffer;
  */
 int setupwifi(int wifimode)
 {
-  int timeout=60;
+  int timeout=10;
   char ssid[41];
   char password[41];
   byte mac[6];
