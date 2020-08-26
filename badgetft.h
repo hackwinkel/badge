@@ -26,7 +26,7 @@
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
 #include <SPI.h>
 #define TFT_CS        5
-#define TFT_RST       23 // Or set to -1 and connect to Arduino RESET pin
+#define TFT_RST       -1 //23 // Or set to -1 and connect to Arduino RESET pin
 #define TFT_DC        15
 #define TFT_MOSI      19
 #define TFT_SCLK      18
