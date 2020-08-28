@@ -25,9 +25,8 @@
 #include "badgetft.h"
 #include "badgerotation.h"
 
-#define BADFGEUSEHARDWARESPI
 
-#ifdef BADFGEUSEHARDWARESPI
+#ifdef BADGEUSEHARDWARESPI
 //hardware spi
 //Adafruit_ST7789::Adafruit_ST7789(int8_t cs, int8_t dc, int8_t rst)
 //Adafruit_ST7789 tftdisplay = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
@@ -52,7 +51,7 @@ void tftinit(int color)
 #endif
   pinMode(TFT_BACKLIGHT,OUTPUT);
   digitalWrite(TFT_BACKLIGHT,HIGH);
-  tftdisplay.setSPISpeed(40000000);
+  //tftdisplay.setSPISpeed(1);                // apparently does nothing for SW SPI nor for selectable HW SPI
   tftdisplay.init(240, 240);                // Init ST7789 240x240
   tftdisplay.setRotation(rotation);         // rotation value defined in badgerotation.h happens to be exactly the one needed by the 7789 library
   tftdisplay.fillScreen(color);

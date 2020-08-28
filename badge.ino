@@ -48,6 +48,7 @@ extern int allowconcurrentupload;
 
 // tft setup in badgetft
 extern Adafruit_ST7789 tftdisplay;
+
 // lagno fields
 extern char playfield[64];
 extern char playground[64]; 

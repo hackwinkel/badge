@@ -26,6 +26,8 @@
 // serial port has already been opened, but we also need access to tft
 #include "badgetft.h"
 extern Adafruit_ST7789 tftdisplay;
+extern SPIClass * hspi;
+
 
 int currentlifebuffer=0;
 
@@ -123,8 +125,32 @@ byte getnextstateofacell(int i, int x, int y)
   }
 }
 
+uint16_t colorcode2color[]={0x0000,0xf800,0xffe0,0x07e0,0x07ff,0x001f,0xf81f};
+
 void iteratelife(void)
 {
+#ifdef BADGEUSEHARDWARESPI
+  Serial.println("iterate");
+  uint16_t pc;
+  // iterate AND transfer to display at the same time, bypassing the adafruit library
+  hspi->beginTransaction(SPISettings(40000000, MSBFIRST, SPI_MODE0)); // because tftdisplay.setSPISpeed(40000000); does zilch
+  digitalWrite(TFT_CS,LOW);
+  digitalWrite(TFT_DC,LOW);
+  hspi->transfer(0x2a);//caset
+  digitalWrite(TFT_DC,HIGH);
+  hspi->transfer(0x00);hspi->transfer(0x00);//start column
+  hspi->transfer(0x00);hspi->transfer(0xef);//end column
+  digitalWrite(TFT_DC,LOW);
+  hspi->transfer(0x2b);//raset
+  digitalWrite(TFT_DC,HIGH);
+  hspi->transfer(0x00);hspi->transfer(0x00);//start column
+  hspi->transfer(0x00);hspi->transfer(0xef);//end column
+  digitalWrite(TFT_DC,LOW);
+  hspi->transfer(0x2C);//start memory write
+  digitalWrite(TFT_DC,HIGH);
+  // two bytes per pixel follow
+#endif
+  
   if ((lifebuffer[0]!=NULL)&&(lifebuffer[1]!=NULL))
   {
     for (int y=0; y<lifeYsize;  y++)
@@ -132,15 +158,22 @@ void iteratelife(void)
       for (int x=0; x<lifeXsize; x++)
       {
         lifebuffer[1-currentlifebuffer][x+lifeXsize*y]=getnextstateofacell(currentlifebuffer, x, y);
+#ifdef BADGEUSEHARDWARESPI
+        pc=colorcode2color[lifebuffer[1-currentlifebuffer][x+lifeXsize*y]];
+        hspi->transfer16(pc);
+#endif
       }
     }
   }
+#ifdef BADGEUSEHARDWARESPI
+  digitalWrite(TFT_CS,HIGH);
+  hspi->endTransaction();
+#endif
 }
-uint16_t colorcode2color[]={0x0000,0xf800,0xffe0,0x07e0,0x07ff,0x001f,0xf81f};
-
 
 void drawlife(void)
 {
+#ifndef BADGEUSEHARDWARESPI
   if ((lifebuffer[0]!=NULL)&&(lifebuffer[1]!=NULL))
   {
     for (int y=0; y<lifeYsize;  y++)
@@ -151,4 +184,6 @@ void drawlife(void)
       }
     }
   }
+  Serial.println("transfer");
+#endif
 }
